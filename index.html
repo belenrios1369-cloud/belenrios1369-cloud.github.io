@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visor de erosión hídrica del suelo · Subcuenca del Río Carapá, Paraguay</title>
+<meta name="description" content="Visor geoespacial gratuito de la erosión hídrica del suelo en la subcuenca del Río Carapá, Canindeyú, Paraguay (2021-2025). Mapas RUSLE de erosión real y potencial, severidad, factores R, K, LS y C, informes en PDF y descarga de datos.">
+<meta name="keywords" content="erosión hídrica, erosión del suelo, pérdida de suelo, RUSLE, Río Carapá, subcuenca del Río Carapá, Canindeyú, Paraguay, Google Earth Engine, visor geoespacial, mapa de erosión, CHIRPS, Landsat, conservación de suelos, FIA UNE">
+<meta name="author" content="Ramona Belén Acosta Ríos">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://belenrios1369-cloud.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_PY">
+<meta property="og:title" content="Visor de erosión hídrica del suelo · Subcuenca del Río Carapá, Paraguay">
+<meta property="og:description" content="Mapas interactivos de pérdida de suelo por erosión hídrica (RUSLE) en la subcuenca del Río Carapá, Canindeyú, 2021-2025.">
+<meta property="og:url" content="https://belenrios1369-cloud.github.io/">
+<meta property="og:image" content="https://belenrios1369-cloud.github.io/img/portada_compartir.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14745a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314745a'/%3E%3Cpath d='M10 44c10-14 18-20 26-12s14 2 18-6v22H10z' fill='%23fff'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Visor geoespacial de la erosión hídrica del suelo en la subcuenca del Río Carapá",
+  "alternateName": "Visor de erosión hídrica Río Carapá",
+  "url": "https://erosion-hidrica-tesis.projects.earthengine.app/view/erosion-hidrica-carapa",
+  "sameAs": "https://belenrios1369-cloud.github.io/",
+  "description": "Visor geoespacial interactivo de acceso libre con los resultados del modelo RUSLE para la subcuenca del Río Carapá, departamento de Canindeyú, Paraguay, periodo 2021-2025: erosión real y potencial, clases de severidad, factores R, K, LS y C, comparación de años, análisis de áreas, informes en PDF y descarga de datos.",
+  "applicationCategory": "Sistema de información geográfica",
+  "operatingSystem": "Navegador web",
+  "inLanguage": "es",
+  "isAccessibleForFree": true,
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "PYG"},
+  "keywords": "erosión hídrica, RUSLE, Río Carapá, Canindeyú, Paraguay, Google Earth Engine, pérdida de suelo",
+  "spatialCoverage": {"@type": "Place", "name": "Subcuenca del Río Carapá, Canindeyú, Paraguay",
+    "geo": {"@type": "GeoCoordinates", "latitude": -24.25, "longitude": -54.75}},
+  "temporalCoverage": "2021/2025",
+  "author": {"@type": "Person", "name": "Ramona Belén Acosta Ríos"},
+  "contributor": {"@type": "Person", "name": "Liz Paola Torrado", "description": "Orientadora"},
+  "sourceOrganization": {"@type": "CollegeOrUniversity", "name": "Facultad de Ingeniería Agronómica, Universidad Nacional del Este", "address": "Minga Guazú, Alto Paraná, Paraguay"},
+  "dateCreated": "2026",
+  "image": "https://belenrios1369-cloud.github.io/img/visor_claro.jpg"
+}
+</script>
+<style>
+:root{--fondo:#f6f8f7;--tarjeta:#ffffff;--texto:#1d2a26;--suave:#5b6b66;--acento:#14745a;--acento2:#0f5b46;--borde:#dfe6e3;
+  --ligero:#1a9641;--moderado:#e6c700;--severo:#fd8d3c;--critico:#d7191c}
+@media (prefers-color-scheme:dark){:root{--fondo:#111816;--tarjeta:#18221f;--texto:#e6eeeb;--suave:#9fb0aa;--acento:#3fbf95;--acento2:#62d3ad;--borde:#2a3733}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--acento)}
+.contenedor{max-width:1080px;margin:0 auto;padding:0 16px}
+header.portada{background:linear-gradient(135deg,#0f5b46,#14745a 55%,#2a9d78);color:#fff;padding:56px 0 48px}
+.etiqueta{text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;opacity:.85;margin:0 0 8px}
+h1{font-size:clamp(1.7rem,4.5vw,2.6rem);line-height:1.2;margin:0 0 14px}
+.portada p.bajada{font-size:1.1rem;max-width:760px;opacity:.95;margin:0 0 26px}
+.botones{display:flex;flex-wrap:wrap;gap:12px}
+.boton{display:inline-block;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none}
+.boton.principal{background:#fff;color:#0f5b46}
+.boton.secundario{border:1.5px solid rgba(255,255,255,.8);color:#fff}
+main section{padding:40px 0;border-bottom:1px solid var(--borde)}
+h2{font-size:1.5rem;margin:0 0 14px}
+h3{font-size:1.1rem;margin:0 0 6px}
+.cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:18px}
+.cifra{background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:16px}
+.cifra b{display:block;font-size:1.6rem;color:var(--acento);line-height:1.2}
+.cifra span{color:var(--suave);font-size:.92rem}
+.marco{position:relative;border:1px solid var(--borde);border-radius:12px;overflow:hidden;background:var(--tarjeta)}
+.marco iframe{display:block;width:100%;height:min(78vh,640px);border:0}
+.nota{color:var(--suave);font-size:.9rem;margin-top:8px}
+.funciones{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.funcion{background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:16px}
+.funcion p{margin:0;color:var(--suave);font-size:.95rem}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+figure{margin:0;background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;overflow:hidden}
+figure img{display:block;width:100%;height:auto}
+figcaption{padding:10px 14px;font-size:.9rem;color:var(--suave)}
+.clases{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 0;padding:0;list-style:none}
+.clases li{display:flex;align-items:center;gap:8px;background:var(--tarjeta);border:1px solid var(--borde);border-radius:999px;padding:6px 12px;font-size:.92rem}
+.clases i{width:14px;height:14px;border-radius:3px;display:inline-block}
+dl.ficha{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;margin:0}
+dl.ficha dt{color:var(--suave)}
+dl.ficha dd{margin:0}
+footer{padding:28px 0 40px;color:var(--suave);font-size:.9rem}
+@media (max-width:560px){dl.ficha{grid-template-columns:1fr}dl.ficha dt{margin-top:8px}}
+</style>
+</head>
+<body>
+<header class="portada">
+  <div class="contenedor">
+    <p class="etiqueta">Visor geoespacial · Acceso libre</p>
+    <h1>Erosión hídrica del suelo en la subcuenca del Río Carapá, Paraguay</h1>
+    <p class="bajada">Mapas interactivos de la pérdida de suelo por erosión hídrica en la subcuenca del Río Carapá, departamento de Canindeyú, para el periodo 2021-2025, calculados con el modelo RUSLE en Google Earth Engine.</p>
+    <div class="botones">
+      <a class="boton principal" href="https://erosion-hidrica-tesis.projects.earthengine.app/view/erosion-hidrica-carapa">Abrir el visor</a>
+      <a class="boton secundario" href="#resultados">Ver resultados</a>
+    </div>
+  </div>
+</header>
+
+<main class="contenedor">
+  <section id="visor">
+    <h2>Visor interactivo</h2>
+    <p>Haga clic en cualquier punto de la subcuenca para conocer la pérdida de suelo, su clase de severidad y una explicación sencilla de lo que significa y qué manejo se recomienda.</p>
+    <div class="marco">
+      <iframe src="https://erosion-hidrica-tesis.projects.earthengine.app/view/erosion-hidrica-carapa" title="Visor de erosión hídrica de la subcuenca del Río Carapá" loading="lazy" allow="geolocation; fullscreen"></iframe>
+    </div>
+    <p class="nota">Si el visor no se carga aquí, ábralo en una pestaña nueva: <a href="https://erosion-hidrica-tesis.projects.earthengine.app/view/erosion-hidrica-carapa">erosion-hidrica-tesis.projects.earthengine.app</a></p>
+  </section>
+
+  <section id="resultados">
+    <h2>Resultados principales, 2021-2025</h2>
+    <p>La subcuenca del Río Carapá abarca 2.675,8 km² en el departamento de Canindeyú. La pérdida de suelo se estimó con la Ecuación Universal de Pérdida de Suelo Revisada (RUSLE), A = R x K x LS x C x P, con datos satelitales de lluvia, suelo, relieve y cobertura vegetal.</p>
+    <div class="cifras">
+      <div class="cifra"><b>10,54 t/ha/año</b><span>Erosión hídrica real media</span></div>
+      <div class="cifra"><b>2,74 millones t</b><span>Suelo perdido por año en la subcuenca</span></div>
+      <div class="cifra"><b>27,6 %</b><span>Superficie sobre el límite tolerable de 11 t/ha/año (72.010 ha)</span></div>
+      <div class="cifra"><b>91,9 %</b><span>Pérdida evitada por la cobertura vegetal frente al suelo desnudo</span></div>
+      <div class="cifra"><b>18,87 a 7,21</b><span>Erosión real en t/ha/año, de 2021 a 2025</span></div>
+      <div class="cifra"><b>129,6 t/ha/año</b><span>Erosión potencial media, sin cobertura vegetal</span></div>
+    </div>
+    <h3 style="margin-top:22px">Clases de severidad de la erosión</h3>
+    <ul class="clases">
+      <li><i style="background:var(--ligero)"></i>Ligero: menos de 5 t/ha/año</li>
+      <li><i style="background:var(--moderado)"></i>Moderado: 5 a 11</li>
+      <li><i style="background:var(--severo)"></i>Severo: 11 a 25</li>
+      <li><i style="background:var(--critico)"></i>Muy severo o crítico: 25 o más</li>
+    </ul>
+  </section>
+
+  <section id="mapas">
+    <h2>Mapas</h2>
+    <div class="galeria">
+      <figure><img src="img/mapa_severidad_real.jpg" width="1400" height="955" loading="lazy" alt="Mapa de severidad de la erosión hídrica real media 2021-2025 en la subcuenca del Río Carapá"><figcaption>Severidad de la erosión hídrica real media, 2021-2025.</figcaption></figure>
+      <figure><img src="img/mapa_erosion_real.jpg" width="1400" height="955" loading="lazy" alt="Mapa de erosión hídrica real media en toneladas por hectárea y año, subcuenca del Río Carapá"><figcaption>Erosión hídrica real media en t/ha/año, 2021-2025.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="funciones">
+    <h2>Qué permite hacer el visor</h2>
+    <div class="funciones">
+      <div class="funcion"><h3>Capas y años</h3><p>Erosión real y potencial, severidad y factores R, K, LS y C de cada año 2021-2025 o del promedio, con modo claro y oscuro.</p></div>
+      <div class="funcion"><h3>Consulta por punto</h3><p>Valores del lugar elegido, gráfico anual y una explicación en lenguaje sencillo con recomendaciones de manejo.</p></div>
+      <div class="funcion"><h3>Análisis de un área</h3><p>Dibuje una parcela y obtenga su erosión media, la superficie por clase de severidad y las toneladas de suelo perdidas.</p></div>
+      <div class="funcion"><h3>Simulador de manejo</h3><p>Estime cuánto bajaría la pérdida de suelo con cobertura permanente, curvas de nivel o terrazas.</p></div>
+      <div class="funcion"><h3>Microcuencas prioritarias</h3><p>Ranking de las 20 microcuencas de la subcuenca según su erosión media y superficie crítica.</p></div>
+      <div class="funcion"><h3>Informes y datos</h3><p>Informe en PDF con mapas y coordenadas de cada consulta, comparación de años y descarga de capas GeoTIFF con registro gratuito.</p></div>
+    </div>
+  </section>
+
+  <section id="capturas">
+    <h2>Capturas</h2>
+    <div class="galeria">
+      <figure><img src="img/visor_claro.jpg" width="1400" height="623" loading="lazy" alt="Visor geoespacial de erosión hídrica en modo claro"><figcaption>Visor en modo claro.</figcaption></figure>
+      <figure><img src="img/visor_oscuro.jpg" width="1400" height="623" loading="lazy" alt="Visor geoespacial de erosión hídrica en modo oscuro con estadísticas"><figcaption>Visor en modo oscuro, sección de estadísticas.</figcaption></figure>
+      <figure><img src="img/informe_pdf.jpg" width="1200" height="846" loading="lazy" alt="Informe en PDF generado por el visor con mapas y coordenadas"><figcaption>Informe en PDF generado para una consulta.</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="metodo">
+    <h2>Método y fuentes de datos</h2>
+    <dl class="ficha">
+      <dt>Modelo</dt><dd>RUSLE (Renard et al., 1997); clases de severidad según Bertoni y Lombardi Neto (2010).</dd>
+      <dt>Factor R</dt><dd>Lluvia CHIRPS v3, validada con la estación Saltos del Guairá; índice de Fournier modificado.</dd>
+      <dt>Factor K</dt><dd>SoilGrids 2.0 y ecuación EPIC (Williams, 1995).</dd>
+      <dt>Factor LS</dt><dd>Modelo de elevación SRTM de 30 m; Moore y Burch (1986), en QGIS 3.40.</dd>
+      <dt>Factor C</dt><dd>NDVI de Landsat 8 y 9; Van der Knijff et al. (2000).</dd>
+      <dt>Verificación</dt><dd>MODIS, MapBiomas Paraguay y GloRESatE.</dd>
+      <dt>Plataforma</dt><dd>Google Earth Engine y QGIS.</dd>
+    </dl>
+  </section>
+</main>
+
+<footer class="contenedor">
+  <p><b>Modelización geoespacial de la erosión hídrica del suelo en la subcuenca del Río Carapá, Paraguay, 2021-2025.</b><br>
+  Tesis de grado de Ramona Belén Acosta Ríos · Carrera de Ingeniería Ambiental, Facultad de Ingeniería Agronómica, Universidad Nacional del Este (FIA-UNE), Minga Guazú, Paraguay, 2026.<br>
+  Orientadora: Prof. Ing. Amb. Mag. Liz Paola Torrado.</p>
+  <p><a href="https://erosion-hidrica-tesis.projects.earthengine.app/view/erosion-hidrica-carapa">Abrir el visor</a></p>
+</footer>
+</body>
+</html>
